@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import { log } from "@/utils/logger";
+import { PORT } from "@config";
 
 export class App {
   public app: Application;
@@ -7,7 +8,7 @@ export class App {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+    this.port = PORT ? parseInt(PORT) : 3000;
   }
 
   public listen() {

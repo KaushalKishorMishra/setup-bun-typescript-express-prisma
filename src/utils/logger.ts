@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
-import { LOG_DIR } from "@/config/config";
+import { LOG_DIR } from "@config";
 import winstonDaily from "winston-daily-rotate-file";
 import winston from "winston";
 

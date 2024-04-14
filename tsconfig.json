@@ -19,8 +19,9 @@
     "importHelpers": true,
     "baseUrl": "src",
     "paths": {
+      "@database": ["database"],
+      "@config": ["config"],
       "@/*": ["*"],
-      "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
@@ -28,8 +29,7 @@
       "@enums/*": ["enums/*"],
       "@middlewares/*": ["middlewares/*"],
       "@utils/*": ["utils/*"],
-      "@exceptions/*": ["exceptions/*"],
-      "@database/*": ["database"]
+      "@exceptions/*": ["exceptions/*"]
     }
   },
   "files": ["./node_modules/@types/node/index.d.ts"],

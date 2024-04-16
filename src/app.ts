@@ -1,6 +1,12 @@
 import express, { Application } from "express";
-import { log } from "@/utils/logger";
-import { PORT } from "@config";
+import { log, stream } from "@utils/logger";
+import { CREDENTIALS, LOG_FORMAT, ORIGIN, PORT } from "@config";
+import prismaConnect from "@database";
+import cors from "cors";
+import bodyParser from "body-parser";
+import hpp from "hpp";
+import helmet from "helmet";
+import morgan from "morgan";
 
 export class App {
   public app: Application;
@@ -9,6 +15,8 @@ export class App {
   constructor() {
     this.app = express();
     this.port = PORT ? parseInt(PORT) : 3000;
+    this.initialize_db_connection();
+    this.initialize_middlewares();
   }
 
   public listen() {
@@ -21,4 +29,18 @@ export class App {
       console.log(err);
     }
   }
+
+  private async initialize_db_connection() {
+    await prismaConnect();
+  }
+
+  private initialize_middlewares() {
+    this.app.use(morgan(LOG_FORMAT, { stream }))
+    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(hpp())
+    this.app.use(helmet())
+  }
+
 }

@@ -16,20 +16,21 @@
     "esModuleInterop": true,
     "allowJs": true,
     "noEmit": false,
-    "importHelpers": true,
+    "importHelpers": false,
     "baseUrl": "src",
     "paths": {
       "@database": ["database"],
       "@config": ["config"],
       "@/*": ["*"],
+      "@repository/*": ["repository/*"],
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@interfaces/*": ["interfaces/*"],
       "@enums/*": ["enums/*"],
+      "@interfaces/*": ["interfaces/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@utils/*": ["utils/*"],
-      "@exceptions/*": ["exceptions/*"]
+      "@exceptions/*": ["exceptions/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "files": ["./node_modules/@types/node/index.d.ts"],

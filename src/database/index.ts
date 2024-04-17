@@ -17,4 +17,4 @@ const prismaConnect = async () => {
   }
 };
 
-export default prismaConnect;
+export { prismaConnect, prisma };

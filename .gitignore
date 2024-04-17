@@ -177,3 +177,7 @@ dist
 
 # prisma migrations
 prisma/migrations
+
+
+# vscode setup
+.vscode/

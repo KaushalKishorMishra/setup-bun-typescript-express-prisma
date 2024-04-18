@@ -1,13 +1,14 @@
 import express, { Application } from "express";
-import { log, stream } from "@utils/logger";
+import { log, stream } from "@/utils/logger.utils";
 import { CREDENTIALS, LOG_FORMAT, ORIGIN, PORT } from "@config";
 import { prismaConnect } from "@database";
 import cors from "cors";
-import bodyParser from "body-parser";
-import hpp from "hpp";
-import helmet from "helmet";
+import * as bodyParser from "body-parser";
 import morgan from "morgan";
 import { Routes } from "@interfaces/route.interface";
+import { ErrorMiddleware } from "@middlewares/error.middleware";
+import hpp from "hpp";
+import helmet from "helmet";
 
 export class App {
   public app: Application;
@@ -19,6 +20,7 @@ export class App {
     this.initialize_db_connection();
     this.initialize_middlewares();
     this.initialize_routes(routes);
+    this.initialize_error_handler();
   }
 
   public listen() {
@@ -39,9 +41,9 @@ export class App {
 
   private initialize_middlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }))
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS}));
     this.app.use(hpp())
     this.app.use(helmet())
   }
@@ -50,6 +52,10 @@ export class App {
     routes.forEach((route) => {
       this.app.use("/api", route.router)
     })
+  }
+
+  private initialize_error_handler() {
+    this.app.use(ErrorMiddleware)
   }
 
 }

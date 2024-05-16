@@ -4,10 +4,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec bun run src/server.ts",
-    "watch": "nodemon --exec bun --watch run src/server.ts",
-    "smol": "nodemon --exec bun --smol run src/server.ts",
-    "watch:smol": "nodemon --exec bun --watch --smol run src/server.ts",
+    "dev": "bun run src/server.ts",
+    "watch": "bun --watch run src/server.ts",
+    "smol": "bun --smol run src/server.ts",
+    "watch:smol": "bun --watch --smol run src/server.ts",
     "migrate": "bunx prisma migrate dev",
     "generate": "bunx prisma generate",
     "studio": "bunx prisma studio"

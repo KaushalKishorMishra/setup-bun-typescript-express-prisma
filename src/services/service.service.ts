@@ -1,6 +1,7 @@
 import { HttpError } from "@exceptions/http.exceptions";
 
 export class Service {
+    
     static generate_otp = async (digit: number = 6): Promise<string> => {
         try {
             let otp: string = "";

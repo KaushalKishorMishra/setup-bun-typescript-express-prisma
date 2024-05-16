@@ -43,7 +43,7 @@ export class App {
     this.app.use(morgan(LOG_FORMAT, { stream }))
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS}));
+    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp())
     this.app.use(helmet())
   }

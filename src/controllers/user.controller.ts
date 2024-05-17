@@ -1,7 +1,7 @@
 import { HttpError } from "@exceptions/http.exceptions";
 import { Bcrypt } from "@utils/bcrypt.utils";
 import { log } from "@utils/logger.utils";
-import { User } from "@interfaces/user.interface";
+import { User } from "@prisma/client";
 import { UserRepository } from "@repository/users.repository";
 import { NextFunction, Request, Response } from "express";
 
@@ -104,13 +104,13 @@ export class UserController {
 
             const userSoftDelete = await UserRepository.soft_delete_user(id);
 
-            if(!userSoftDelete){
+            if (!userSoftDelete) {
                 throw new HttpError(500, `something went wrong while deleting user with id:: ${id}`);
             }
-            
+
 
             res.status(200).json({ status: 200, data: userSoftDelete, message: `user deleted \n deleted date: ${userSoftDelete.deletedAt}` });
-            
+
         }
         catch (err) {
             log.error(err);
@@ -130,7 +130,7 @@ export class UserController {
 
             const userRestore = await UserRepository.restore_user(id);
 
-            if(!userRestore){
+            if (!userRestore) {
                 throw new HttpError(500, `something went wrong while restoring user with id:: ${id}`);
             }
 
@@ -143,7 +143,7 @@ export class UserController {
     }
 
     static delete_user = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        try{
+        try {
             const id: string = req.params.id;
 
             const userExist = await UserRepository.get_user_by_id(id);
@@ -154,13 +154,13 @@ export class UserController {
 
             const userDelete = await UserRepository.delete_user(id);
 
-            if(!userDelete){
+            if (!userDelete) {
                 throw new HttpError(500, `something went wrong while deleting user with id:: ${id}`);
             }
 
             res.status(200).json({ status: 200, data: userDelete, message: `user deleted successfully` });
         }
-        catch(err){
+        catch (err) {
             log.error(err);
             next(err);
         }

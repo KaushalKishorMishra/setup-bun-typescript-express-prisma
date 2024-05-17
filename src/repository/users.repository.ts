@@ -1,5 +1,5 @@
-import { User } from "@interfaces/user.interface";
 import { prisma } from "@database";
+import { User } from "@prisma/client";
 
 export class UserRepository {
     static get_users = async (): Promise<User[]> => {

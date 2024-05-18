@@ -3,6 +3,7 @@ import { log } from "@utils/logger.utils";
 
 const prisma = new PrismaClient({
   errorFormat: "pretty",
+  log: ['info', 'warn', 'query', 'error'],
 });
 
 const prismaConnect = async () => {

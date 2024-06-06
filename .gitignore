@@ -183,5 +183,5 @@ prisma/migrations
 .vscode/
 
 
-# upload files
-./uploads/*
+# upload filesuploads
+uploads/*

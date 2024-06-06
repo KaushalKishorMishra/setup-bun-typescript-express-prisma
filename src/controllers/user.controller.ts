@@ -50,7 +50,7 @@ export class UserController {
     static create_user = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const inputData: User = req.body;
-
+            const avatar_path = req.file.path;
             const userExist = await UserRepository.get_user_by_email(inputData.email);
 
             if (userExist) {
@@ -59,7 +59,7 @@ export class UserController {
 
             const hashedPassword = await Bcrypt.encrypt(inputData.password);
 
-            const data: User = { ...inputData, password: hashedPassword };
+            const data: User = { ...inputData, password: hashedPassword, avatar: avatar_path };
 
             const newUser = await UserRepository.create_user(data);
 

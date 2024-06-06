@@ -4,8 +4,8 @@ import { Routes } from "@interfaces/route.interface";
 import { Router } from "express";
 
 export class UserRoute implements Routes {
-    public path;
-    public router;
+    public path: string;
+    public router: Router;
 
     constructor() {
         this.path = '/users';
@@ -29,8 +29,9 @@ export class UserRoute implements Routes {
 
     private post_routes() {
         this.router.post(`${this.path}/sign-up`,
-            new Multer().upload_image.single("image"),
-            UserController.create_user
+            new Multer().image_multer.single("avatar"),
+            // new Multer().file_multer.single("file"),
+            UserController.create_user,
         );
     }
 
@@ -47,9 +48,7 @@ export class UserRoute implements Routes {
     }
 
     private delete_routes() {
-        this.router.delete(`${this.path}/delete`, (req, res) => {
-            res.send('DELETE Request to the homepage');
-        });
+        this.router.delete(`${this.path}/delete/:id`, UserController.delete_user);
     }
 
 

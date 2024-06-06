@@ -181,3 +181,7 @@ prisma/migrations
 
 # vscode setup
 .vscode/
+
+
+# upload files
+./uploads/*

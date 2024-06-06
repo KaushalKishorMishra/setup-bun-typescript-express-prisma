@@ -9,7 +9,9 @@
     "watch:smol": "bun --watch --smol run src/server.ts",
     "migrate": "bunx prisma migrate dev",
     "generate": "bunx prisma generate",
-    "studio": "bunx prisma studio"
+    "studio": "bunx prisma studio",
+    "reset:db": "bunx prisma migrate reset ",
+    "force:reset:db": "bunx prisma migrate reset --force"
   },
   "bun-create": {
     "start": "bun run src/index.ts"

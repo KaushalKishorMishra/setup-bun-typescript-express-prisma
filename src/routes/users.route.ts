@@ -29,7 +29,7 @@ export class UserRoute implements Routes {
 
     private post_routes() {
         this.router.post(`${this.path}/sign-up`,
-            new Multer().upload_image.single("user_image"),
+            new Multer().upload_image.single("image"),
             UserController.create_user
         );
     }

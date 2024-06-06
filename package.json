@@ -4,8 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run src/server.ts",
-    "watch": "bun --watch run src/server.ts",
+    "server": "bun --watch run src/server.ts",
     "smol": "bun --smol run src/server.ts",
     "watch:smol": "bun --watch --smol run src/server.ts",
     "migrate": "bunx prisma migrate dev",

@@ -15,7 +15,7 @@ export class UserAuthentication {
         try {
             const { email, password } = req.body;
 
-            const user = await UserRepository.get_user_by_email(email);
+            const user = await UserRepository.get_email(email);
 
             if (!user) {
                 throw new HttpError(404, `user not found with email:: ${email}`);
@@ -25,6 +25,10 @@ export class UserAuthentication {
 
             if (!isPasswordMatch) {
                 throw new HttpError(401, "invalid credentials");
+            }
+
+            if(user.is_verified != true) {
+                throw new HttpError(401, "user not verified, verify your email");
             }
 
             const payload: Payload = {
@@ -54,7 +58,7 @@ export class UserAuthentication {
 
             const user_id = payload.user_id;
 
-            const user = await UserRepository.get_user_by_id(user_id);
+            const user = await UserRepository.get_id(user_id);
 
             if (!user) {
                 throw new HttpError(404, "user not found");

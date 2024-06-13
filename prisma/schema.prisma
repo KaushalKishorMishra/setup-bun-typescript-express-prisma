@@ -8,17 +8,31 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String?
-  email     String    @unique
-  password  String
-  phone     String?
-  role      Role      @default(USER)
-  address   String?
-  avatar    String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  id          String    @id @default(uuid())
+  name        String?
+  email       String    @unique
+  password    String
+  phone       String?
+  role        Role      @default(USER)
+  address     String?
+  avatar      String?
+  is_verified Boolean   @default(false)
+  tokens      Token[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model Token {
+  id         String    @id @default(uuid())
+  purpose    String
+  token      String
+  user       User      @relation(fields: [user_id], references: [id])
+  user_id    String
+  expires_at DateTime
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 }
 
 enum Role {

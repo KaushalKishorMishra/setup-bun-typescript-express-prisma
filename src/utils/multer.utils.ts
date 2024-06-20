@@ -8,7 +8,8 @@ import path from "path"
 
 const image_storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const upload_path = path.join(IMAGE_UPLOAD_PATH + file.fieldname);
+        const user_name = req.body.name;
+        const upload_path = path.join(IMAGE_UPLOAD_PATH + "/" + user_name + "/images/" + file.fieldname);
         fs.mkdirSync(upload_path, { recursive: true })
         cb(null, upload_path);
     },
@@ -18,11 +19,13 @@ const image_storage = multer.diskStorage({
         const unique_prefix = new Date().getTime() + "-" + random_string + "-" + random_number + "-";
         cb(null, unique_prefix + file.originalname);
     }
+    
 });
 
 const file_storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const upload_path = path.join(FILE_UPLOAD_PATH + file.fieldname);
+        const user_name = req.body.name;
+        const upload_path = path.join(FILE_UPLOAD_PATH  + "/" + user_name + "/docs/"+ file.fieldname);
         fs.mkdirSync(upload_path, { recursive: true })
         cb(null, upload_path);
     },

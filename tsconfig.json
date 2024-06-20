@@ -30,7 +30,8 @@
       "@interfaces/*": ["interfaces/*"],
       "@middlewares/*": ["middlewares/*"],
       "@exceptions/*": ["exceptions/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@validations/*": ["validations/*"],
     }
   },
   "files": ["./node_modules/@types/node/index.d.ts"],
